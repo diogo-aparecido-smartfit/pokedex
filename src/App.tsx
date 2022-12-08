@@ -1,34 +1,90 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState } from "react";
+import styled from "styled-components";
+import api from "./utils/api";
+import { Spinner, Input, Button } from "@chakra-ui/react";
+import PokemonCard from "./components/PokemonCard";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [pokemon, setPokemon] = useState(null as any);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null || "");
+  const [researchedPokemon, setResearchedPokemon] = useState("");
+
+  const handleSearchPokemon = (e: any) => {
+    setResearchedPokemon(e.target.value);
+  };
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    if (!researchedPokemon) {
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const response = await api.get(`/pokemon/${researchedPokemon}`);
+      setPokemon(response.data);
+      setError("");
+      setIsLoading(false);
+    } catch (err) {
+      setPokemon(null);
+      setError("Pókemon não encontrado.");
+      setIsLoading(false);
+      console.log(err);
+    }
+  };
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Input
+          w="400px"
+          type="text"
+          value={researchedPokemon}
+          onChange={handleSearchPokemon}
+          placeholder="Digite o nome do pokemon"
+        />
+        <Button type="submit">
+          {isLoading ? (
+            <>
+              <Spinner />
+            </>
+          ) : (
+            <>Procurar</>
+          )}
+        </Button>
+      </Form>
+
+      {pokemon ? (
+        <Container>
+          <PokemonCard
+            name={pokemon.name}
+            id={pokemon.id}
+            image={pokemon.sprites["front_default"]}
+            weight={pokemon.weight * 10}
+            height={pokemon.height}
+          />
+        </Container>
+      ) : (
+        <></>
+      )}
+    </>
+  );
 }
 
-export default App
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem auto;
+  gap: 1rem;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5rem auto;
+`;
