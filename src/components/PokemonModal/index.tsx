@@ -85,9 +85,7 @@ export default function PokemonModal({
             <HStack justifyContent="center" mt="1.5rem" gap="1">
               {pokemon.types.map((pokemontype: any) => (
                 <span key={pokemontype.type.name}>
-                  <Image
-                    src={`../../../public/images/${pokemontype.type.name}.svg`}
-                  />
+                  <Image src={`/public/images/${pokemontype.type.name}.svg`} />
                 </span>
               ))}
             </HStack>

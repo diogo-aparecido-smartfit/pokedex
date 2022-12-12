@@ -5,7 +5,6 @@ import api from "./utils/api";
 import Pokemon from "./components/Pokemon";
 import SearchPokemon from "./components/SearchPokemon";
 import { useToast } from "@chakra-ui/react";
-import pokeimage from "../public/images/pokedex.png";
 
 export default function App() {
   const [pokemon, setPokemon] = useState(null as any);
@@ -47,7 +46,7 @@ export default function App() {
     <>
       <Container>
         <Pokedex>
-          <Pokeimage src={pokeimage} />
+          <Pokeimage src="/public/images/pokedex.png" />
           <SearchPokemon
             handleSearchPokemon={handleSearchPokemon}
             handleSubmit={handleSubmit}
