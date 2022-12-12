@@ -46,7 +46,7 @@ export default function App() {
     <>
       <Container>
         <Pokedex>
-          <Pokeimage src="../public/images/pokedex.png" />
+          <Pokeimage src="./public/images/pokedex.png" />
           <SearchPokemon
             handleSearchPokemon={handleSearchPokemon}
             handleSubmit={handleSubmit}
