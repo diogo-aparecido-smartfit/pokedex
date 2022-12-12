@@ -8,6 +8,8 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  Divider,
+  VStack,
 } from "@chakra-ui/react";
 import { PokemonId } from "./styles";
 import "./styles.css";
@@ -26,6 +28,8 @@ export default function PokemonModal({
   const PokemonType = pokemon.types.map(
     (pokemontype: any) => pokemontype.type.name
   );
+
+  console.log(pokemon.stats[0]["base_stat"]);
 
   return (
     <>
@@ -55,12 +59,14 @@ export default function PokemonModal({
             transition="0.2s"
             _hover={{ color: "#fff" }}
           />
-          <ModalBody display="flex" flexDirection="column">
+          <ModalBody
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+          >
             <Text
               fontWeight="800"
               fontSize="36px"
-              alignItems="center"
-              justifyContent="center"
               margin="0 auto"
               background="none"
               className={PokemonType[0]}
@@ -70,15 +76,13 @@ export default function PokemonModal({
             <Text
               fontWeight="800"
               fontSize="18px"
-              alignItems="center"
-              justifyContent="center"
               margin="0 auto"
               color="white"
             >
               <PokemonId className={PokemonType[0]}>#</PokemonId>
               {("000" + pokemon.id).slice(-4)}
             </Text>
-            <HStack justifyContent="center" mt="1.5rem" gap="1rem">
+            <HStack justifyContent="center" mt="1.5rem" gap="1">
               {pokemon.types.map((pokemontype: any) => (
                 <span key={pokemontype.type.name}>
                   <Image
@@ -86,6 +90,28 @@ export default function PokemonModal({
                   />
                 </span>
               ))}
+            </HStack>
+            <HStack my="8" color="white" justifyContent="space-around" px="8">
+              <VStack>
+                <Text color="white" fontSize="lg" fontWeight="600">
+                  {pokemon.stats[0]["base_stat"]}
+                </Text>
+                <Text color="#898989">Hp</Text>
+              </VStack>
+              <Divider opacity="0.1" orientation="vertical" h="8" />
+              <VStack lineHeight="1">
+                <Text fontSize="lg" fontWeight="600">
+                  {pokemon.weight / 10} kg
+                </Text>
+                <Text color="#898989">Peso</Text>
+              </VStack>
+              <Divider opacity="0.1" orientation="vertical" h="8" />
+              <VStack lineHeight="1">
+                <Text fontSize="lg" fontWeight="600">
+                  {pokemon.height * 10} cm
+                </Text>
+                <Text color="#898989">Altura</Text>
+              </VStack>
             </HStack>
           </ModalBody>
           {/* <ModalFooter>
