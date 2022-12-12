@@ -92,8 +92,8 @@ export default function PokemonModal({
               ))}
             </HStack>
             <HStack my="8" color="white" justifyContent="space-around" px="8">
-              <VStack>
-                <Text color="white" fontSize="lg" fontWeight="600">
+              <VStack lineHeight="1">
+                <Text fontSize="lg" fontWeight="600">
                   {pokemon.stats[0]["base_stat"]}
                 </Text>
                 <Text color="#898989">Hp</Text>

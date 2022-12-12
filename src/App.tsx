@@ -43,18 +43,20 @@ export default function App() {
   };
 
   return (
-    <Container>
-      <Pokedex>
-        <Pokeimage src="../public/images/pokedex.png" />
-        <SearchPokemon
-          handleSearchPokemon={handleSearchPokemon}
-          handleSubmit={handleSubmit}
-          researchedPokemon={researchedPokemon}
-          isLoading={isLoading}
-        />
-      </Pokedex>
-      {pokemon ? <Pokemon pokemon={pokemon} /> : <></>}
-    </Container>
+    <>
+      <Container>
+        <Pokedex>
+          <Pokeimage src="../public/images/pokedex.png" />
+          <SearchPokemon
+            handleSearchPokemon={handleSearchPokemon}
+            handleSubmit={handleSubmit}
+            researchedPokemon={researchedPokemon}
+            isLoading={isLoading}
+          />
+        </Pokedex>
+        {pokemon ? <Pokemon pokemon={pokemon} /> : <></>}
+      </Container>
+    </>
   );
 }
 
