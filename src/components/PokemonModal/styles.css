@@ -1,0 +1,75 @@
+.grass {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(38, 235, 90);
+  background: rgb(38, 235, 90);
+}
+.fire {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(235, 71, 38);
+  background: rgb(235, 71, 38);
+}
+.water {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(38, 186, 235);
+  background: rgb(38, 186, 235);
+}
+.electric {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(235, 209, 38);
+  background: rgb(235, 209, 38);
+}
+.ice {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(38, 219, 235);
+  background: rgb(38, 219, 235);
+}
+.poison {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(176, 38, 235);
+  background: rgb(176, 38, 235);
+}
+.ground {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(181, 131, 92);
+  background: rgb(181, 131, 92);
+}
+.flying {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(161, 215, 230);
+  background: rgb(161, 215, 230);
+}
+.psychic {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(161, 215, 230);
+  background: rgb(161, 215, 230);
+}
+.ghost {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(131, 24, 133);
+  background: rgb(131, 24, 133);
+}
+.bug {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(113, 209, 10);
+  background: rgb(113, 209, 10);
+}
+.rock {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(166, 87, 8);
+  background: rgb(166, 87, 8);
+}
+.dragon {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(50, 24, 217);
+  background: rgb(50, 24, 217);
+}
+.normal {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(168, 162, 157);
+  background: rgb(168, 162, 157);
+}
+.fairy {
+  border-radius: 0px 0px 900px 10px;
+  color: rgb(255, 148, 191);
+  background: rgb(255, 148, 191);
+}

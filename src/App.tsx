@@ -1,14 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
 import api from "./utils/api";
-import { Spinner, Input, Button } from "@chakra-ui/react";
-import PokemonCard from "./components/PokemonCard";
+
+import Pokemon from "./components/Pokemon";
+import SearchPokemon from "./components/SearchPokemon";
+import { useToast } from "@chakra-ui/react";
 
 export default function App() {
   const [pokemon, setPokemon] = useState(null as any);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null || "");
   const [researchedPokemon, setResearchedPokemon] = useState("");
+  const toast = useToast();
 
   const handleSearchPokemon = (e: any) => {
     setResearchedPokemon(e.target.value);
@@ -21,70 +23,64 @@ export default function App() {
     }
     setIsLoading(true);
     try {
-      const response = await api.get(`/pokemon/${researchedPokemon}`);
+      const response = await api.get(
+        `/pokemon/${researchedPokemon.toLowerCase()}`
+      );
       setPokemon(response.data);
-      setError("");
+      setResearchedPokemon("");
       setIsLoading(false);
-    } catch (err) {
+    } catch (err: any) {
       setPokemon(null);
-      setError("Pókemon não encontrado.");
       setIsLoading(false);
-      console.log(err);
+      toast({
+        title: `Erro ${err.response.status}`,
+        description: `Não foi possível concluir a sua requisição!`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
 
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <Input
-          w="400px"
-          type="text"
-          value={researchedPokemon}
-          onChange={handleSearchPokemon}
-          placeholder="Digite o nome do pokemon"
+    <Container>
+      <Pokedex>
+        <Pokeimage src="../public/images/pokedex.png" />
+        <SearchPokemon
+          handleSearchPokemon={handleSearchPokemon}
+          handleSubmit={handleSubmit}
+          researchedPokemon={researchedPokemon}
+          isLoading={isLoading}
         />
-        <Button type="submit">
-          {isLoading ? (
-            <>
-              <Spinner />
-            </>
-          ) : (
-            <>Procurar</>
-          )}
-        </Button>
-      </Form>
-
-      {pokemon ? (
-        <Container>
-          <PokemonCard
-            name={pokemon.name}
-            id={pokemon.id}
-            image={pokemon.sprites["front_default"]}
-            weight={pokemon.weight * 10}
-            height={pokemon.height}
-          />
-        </Container>
-      ) : (
-        <></>
-      )}
-    </>
+      </Pokedex>
+      {pokemon ? <Pokemon pokemon={pokemon} /> : <></>}
+    </Container>
   );
 }
 
-export const Form = styled.form`
+export const Pokedex = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 3rem auto;
-  gap: 1rem;
 `;
 
 export const Container = styled.div`
   display: flex;
-  display: flex;
+  width: 100vw;
+  height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 5rem auto;
+  margin: 0 auto;
+
+  background: rgb(211, 10, 64);
+  background: radial-gradient(
+    circle,
+    rgba(211, 10, 64, 1) 0%,
+    rgba(60, 10, 23, 1) 100%
+  );
+`;
+
+export const Pokeimage = styled.img`
+  width: 350px;
 `;
