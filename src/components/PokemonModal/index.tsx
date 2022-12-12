@@ -29,8 +29,6 @@ export default function PokemonModal({
     (pokemontype: any) => pokemontype.type.name
   );
 
-  console.log(pokemon.stats[0]["base_stat"]);
-
   return (
     <>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
